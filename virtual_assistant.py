@@ -6,11 +6,12 @@ import pygame
 import keyboard
 
 def main():
-    pygame.init()
-    window = pygame.display.set_mode((500, 500))
-    window.fill(color = (255, 255, 255))
     
     while True:
+        pygame.init()
+        window = pygame.display.set_mode((500, 500))
+        window.fill(color = (255, 255, 255))
+        
         pygame.display.update()
         
         font_big = pygame.font.Font('freesansbold.ttf', 29)
@@ -83,13 +84,15 @@ def calculator(window, font_big, font_instructions, font_normal):
         window.blit(instructions, (173,50))
         window.blit(quit, (205, 450))
         
+        pygame.display.update()
+        
         input = input_method()
         new = False
         
         pygame.time.wait(2500)
         
         if input == 'exit':
-            main()
+            return None
         
         while True:
             pygame.display.update()
@@ -113,7 +116,7 @@ def calculator(window, font_big, font_instructions, font_normal):
                         new = True
                         break
                     elif input.lower() == 'exit':
-                        main()
+                        return None
                     
             except: 
                 new = True
@@ -200,7 +203,7 @@ def clock(window, font_big, font_instructions):
                         hours -= 1
                         minutes = 59
                         
-                main()
+                return None
                 
             if input.lower() == 'stopwatch':
                 
@@ -245,12 +248,14 @@ def clock(window, font_big, font_instructions):
                         
                     if keyboard.is_pressed(' '):
                         pygame.time.wait(3000)
-                        main()
+                        return None
                         
                     pygame.display.update()    
                     pygame.event.get()
                     pygame.time.wait(1000)
                     seconds += 1
+                    
+            break
 
 
 def weather(window, font_big, font_instructions, font_normal):
@@ -329,8 +334,7 @@ def weather(window, font_big, font_instructions, font_normal):
                     window.fill(color=(255,255,255))
                     break
                 elif input.lower() == 'exit':
-                    main()
-                    new = True
+                    return None
                 
             if new:
                 break
